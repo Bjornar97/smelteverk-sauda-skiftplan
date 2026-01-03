@@ -4,6 +4,7 @@ import {
     CalendarMinus as CalendarMinusIcon,
     CalendarMonth as CalendarMonthIcon,
     Close as CloseIcon,
+    Download,
     Share as ShareIcon,
 } from "mdue";
 import { useScheduleStore } from "./stores/schedule";
@@ -52,7 +53,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 const install = () => {
     defferedPrompt?.prompt();
 
-    defferedPrompt?.userChoise.then(() => {
+    defferedPrompt?.userChoice.then(() => {
         defferedPrompt = null;
     });
 };
@@ -80,6 +81,7 @@ const share = () => {
         <div class="install-card" v-if="showInstallCard">
             <p>Installer som app</p>
             <button type="button" class="button" @click="install">
+                <Download />
                 Installer
             </button>
             <button type="button" class="icon-button">
@@ -149,6 +151,10 @@ main {
     margin: 0 1rem;
 }
 
+header {
+    margin-bottom: 2rem;
+}
+
 .install-card {
     display: grid;
     grid-template-columns: 1fr max-content max-content;
@@ -164,7 +170,10 @@ main {
     }
 
     .button {
-        padding: 0.75rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem 0.75rem 1.25rem;
         background-color: var(--color-primary);
         color: hsl(var(--color-primary-hue), var(--color-primary-sat), 85%);
         border: none;

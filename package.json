@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview --port 4173",
-    "build": "vite build"
+    "build": "vite build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.20",
@@ -24,6 +27,7 @@
     "@types/node": "^24.10.4",
     "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^6.0.3",
+    "@vitest/ui": "^4.0.16",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
     "jsdom": "^27.4.0",

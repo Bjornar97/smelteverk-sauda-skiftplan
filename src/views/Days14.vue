@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { ref } from "vue";
 import DateShift from "../components/DateShift.vue";
 import calendar from "dayjs/plugin/calendar";
+import NextShift from "@/components/NextShift.vue";
 
 dayjs.extend(calendar);
 
@@ -53,29 +54,36 @@ const shifts = computed(() => {
 </script>
 
 <template>
-    <h1 class="title">Neste 14 dager</h1>
-    <form @submit.prevent class="from-date-form">
-        <label class="from-date-form__label" for="from-date">Fra dato</label>
-        <input
-            class="from-date-form__input"
-            type="date"
-            name="from-date"
-            v-model="fromDateString"
-        />
-        <button
-            class="from-date-form__button"
-            v-if="!fromDate.isSame(dayjs(), 'date')"
-            @click="fromDateString = dayjs().format('YYYY-MM-DD')"
-        >
-            I dag
-        </button>
-    </form>
+    <div>
+        <h1 class="title">Neste skift</h1>
+        <NextShift />
 
-    <ul class="shifts-list">
-        <li v-for="shift in shifts">
-            <DateShift :date="shift.date" :shift="shift.shift"></DateShift>
-        </li>
-    </ul>
+        <h2 class="title">Neste 14 dager</h2>
+        <form @submit.prevent class="from-date-form">
+            <label class="from-date-form__label" for="from-date"
+                >Fra dato</label
+            >
+            <input
+                class="from-date-form__input"
+                type="date"
+                name="from-date"
+                v-model="fromDateString"
+            />
+            <button
+                class="from-date-form__button"
+                v-if="!fromDate.isSame(dayjs(), 'date')"
+                @click="fromDateString = dayjs().format('YYYY-MM-DD')"
+            >
+                I dag
+            </button>
+        </form>
+
+        <ul class="shifts-list">
+            <li v-for="shift in shifts" :key="shift.date.format('YYYY-MM-DD')">
+                <DateShift :date="shift.date" :shift="shift.shift"></DateShift>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -119,6 +127,7 @@ main {
         color: var(--color-text-invert);
         border: none;
         border-radius: 0.3rem;
+        cursor: pointer;
     }
 }
 </style>
